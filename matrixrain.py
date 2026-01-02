@@ -5,19 +5,11 @@ import time
 import math
 import argparse
 
-# ---------------------------
-# Color setup
-# ---------------------------
-
 def init_colors():
     curses.start_color()
     curses.use_default_colors()
     curses.init_pair(1, curses.COLOR_GREEN, -1)
     curses.init_pair(2, curses.COLOR_WHITE, -1)
-
-# ---------------------------
-# Matrix column model
-# ---------------------------
 
 class Column:
     def __init__(self, x, height):
@@ -33,10 +25,6 @@ class Column:
         self.y += self.speed
         if self.y - self.length > height:
             self.reset(height)
-
-# ---------------------------
-# Main animation loop
-# ---------------------------
 
 def run(stdscr, seconds, fps):
     curses.curs_set(0)
@@ -63,13 +51,11 @@ def run(stdscr, seconds, fps):
         if seconds > 0 and now - start_time >= seconds:
             break
 
-        # Consume input silently (CTRL-C handled by wrapper)
         try:
             stdscr.getch()
         except Exception:
             pass
 
-        # Handle terminal resize
         new_rows, new_cols = stdscr.getmaxyx()
         if (new_rows, new_cols) != (rows, cols):
             rows, cols = new_rows, new_cols
@@ -79,7 +65,6 @@ def run(stdscr, seconds, fps):
                 columns.append(Column(x, rows))
             stdscr.erase()
 
-        # Soft clear less often to keep trails dense
         if tick % 12 == 0:
             stdscr.erase()
 
@@ -118,10 +103,6 @@ def run(stdscr, seconds, fps):
 
         tick += 1
         time.sleep(frame_delay)
-
-# ---------------------------
-# Entrypoint
-# ---------------------------
 
 def main():
     parser = argparse.ArgumentParser(
