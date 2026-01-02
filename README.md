@@ -1,4 +1,4 @@
-# Matrix Terminal Rain (Real Code)
+# Matrix Terminal Binary Rain
 
 This is a real terminal animation.
 No video effects. No rendering tricks.
