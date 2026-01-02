@@ -47,7 +47,7 @@ def run(stdscr, seconds, fps):
     init_colors()
 
     start_time = time.time()
-    frame_delay = 1.0 / fps
+    frame_delay = 0.3 / fps
     tick = 0
 
     rows, cols = stdscr.getmaxyx()
